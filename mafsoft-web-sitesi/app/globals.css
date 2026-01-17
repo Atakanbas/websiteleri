@@ -1,0 +1,281 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base Colors - Dark Premium Slate */
+    --background: 222 15% 18%;
+    /* Darker gunmetal gray */
+    --foreground: 210 40% 98%;
+    /* Light text for contrast */
+
+    --card: 222 15% 23%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 15% 23%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary - Dark Navy (from logo) - Kept but adjusted for contrast if needed */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary - Orange accent (from logo) */
+    --secondary: 24 95% 53%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 222 15% 25%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.5rem;
+
+    /* Section Padding */
+    --section-padding: 5rem;
+
+    /* Dynamic Accent System - Default */
+    --accent: 210 40% 96%;
+    --accent-weak: 210 40% 98%;
+    --accent-strong: 210 40% 90%;
+
+    /* Sector-Specific Accent Colors */
+    /* Health/Medical - Turkuaz */
+    --health: 174 72% 56%;
+    --health-weak: 174 72% 96%;
+    --health-strong: 174 72% 46%;
+
+    /* CRM/ERP - Blue */
+    --crm: 217 91% 60%;
+    --crm-weak: 217 91% 96%;
+    --crm-strong: 217 91% 50%;
+
+    /* WhatsApp Bot - Green */
+    --whatsapp: 142 71% 45%;
+    --whatsapp-weak: 142 71% 96%;
+    --whatsapp-strong: 142 71% 35%;
+
+    /* Electronics - Amber */
+    --electronics: 38 92% 50%;
+    --electronics-weak: 38 92% 96%;
+    --electronics-strong: 38 92% 40%;
+
+    /* Booking/Appointment - Purple */
+    --booking: 258 90% 66%;
+    --booking-weak: 258 90% 96%;
+    --booking-strong: 258 90% 56%;
+
+    /* B2B Custom - Indigo */
+    --b2b: 239 84% 67%;
+    --b2b-weak: 239 84% 96%;
+    --b2b-strong: 239 84% 57%;
+  }
+
+  /* Design Variant V2: Soft Gradient */
+  [data-theme="soft-gradient"] {
+    --background: 220 40% 98%;
+    --muted: 220 40% 95%;
+  }
+
+  /* Design Variant V3: Monochrome + Accent */
+  [data-theme="monochrome"] {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+  }
+
+  /* Dynamic Accent Application */
+  [data-accent="health"] {
+    --accent: var(--health);
+    --accent-weak: var(--health-weak);
+    --accent-strong: var(--health-strong);
+  }
+
+  [data-accent="crm"] {
+    --accent: var(--crm);
+    --accent-weak: var(--crm-weak);
+    --accent-strong: var(--crm-strong);
+  }
+
+  [data-accent="whatsapp"] {
+    --accent: var(--whatsapp);
+    --accent-weak: var(--whatsapp-weak);
+    --accent-strong: var(--whatsapp-strong);
+  }
+
+  [data-accent="electronics"] {
+    --accent: var(--electronics);
+    --accent-weak: var(--electronics-weak);
+    --accent-strong: var(--electronics-strong);
+  }
+
+  [data-accent="booking"] {
+    --accent: var(--booking);
+    --accent-weak: var(--booking-weak);
+    --accent-strong: var(--booking-strong);
+  }
+
+  [data-accent="b2b"] {
+    --accent: var(--b2b);
+    --accent-weak: var(--b2b-weak);
+    --accent-strong: var(--b2b-strong);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Responsive Section Padding */
+  @media (max-width: 1024px) {
+    :root {
+      --section-padding: 4rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --section-padding: 3rem;
+    }
+  }
+
+  /* Smooth Scroll */
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100vh;
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Focus Visible */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-section;
+  }
+
+  .snap-section {
+    @apply min-h-screen w-full snap-start flex items-center relative;
+  }
+
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .accent-border {
+    @apply border-l-4 border-accent;
+  }
+
+  .accent-text {
+    @apply text-accent;
+  }
+
+  .accent-bg {
+    @apply bg-accent-weak;
+  }
+
+  .accent-hover {
+    @apply hover:bg-accent-weak transition-colors;
+  }
+
+  /* Shimmer effect for backgrounds */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  /* Fade in animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-scale {
+    animation: fadeInScale 0.6s ease-out forwards;
+  }
+
+  /* Blur transitions */
+  .blur-enter {
+    filter: blur(10px);
+    opacity: 0;
+    transition: filter 0.5s ease-out, opacity 0.5s ease-out;
+  }
+
+  .blur-enter-active {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
